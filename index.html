@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Descriptive analysis of RTP-to-bed-assignment turnaround for ED to 1 East cases, July 15–September 15, 2026." />
+  <title>RTP → Bed Assignment | THHBD</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">TH</div>
+      <div>
+        <strong>THHBD Patient Flow Analysis</strong>
+        <span>Descriptive review • July 15–September 15, 2026</span>
+      </div>
+    </div>
+    <nav aria-label="Primary navigation">
+      <a href="#overview">Overview</a>
+      <a href="#cohorts">Cohorts</a>
+      <a href="#capacity">Capacity</a>
+      <a href="#shift">Day / Night</a>
+      <a href="#questions">Questions</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="overview">
+      <div class="hero-copy">
+        <p class="eyebrow">RTP → BED ASSIGNMENT</p>
+        <h1>Where does the waiting time accumulate?</h1>
+        <p class="lede">A visual, descriptive analysis of 104 ED → 1 East bed requests. The site isolates the interval from <strong>Ready to Plan (RTP)</strong> to <strong>final bed assignment</strong> so that pre-assignment delay is not blended with patient transport.</p>
+        <div class="scope-note">This analysis describes observed patterns. It does not assign causality, responsibility, or a prescribed operational solution.</div>
+      </div>
+      <div class="flow-card" aria-label="Patient flow diagram">
+        <div class="flow-step"><span>01</span><strong>ED / Transfer</strong><small>patient identified</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step focus"><span>02</span><strong>RTP</strong><small>ready to place</small></div>
+        <div class="flow-arrow active">→</div>
+        <div class="flow-step focus"><span>03</span><strong>Bed Assignment</strong><small>final bed selected</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step"><span>04</span><strong>Patient Movement</strong><small>post-assignment</small></div>
+      </div>
+    </section>
+
+    <section class="kpis" aria-label="Executive snapshot">
+      <article><span>Cases analyzed</span><strong>104</strong><small>ED → 1 East cohort</small></article>
+      <article><span>Median RTP → assignment</span><strong>57 min</strong><small>all cases</small></article>
+      <article><span>Assigned within 60 min</span><strong>53</strong><small>51.0% of cohort</small></article>
+      <article><span>Over 120 min</span><strong>29</strong><small>27.9% of cohort</small></article>
+    </section>
+
+    <section class="panel" id="cohorts">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">DISTRIBUTION</p>
+          <h2>Nearly 3 in 10 cases exceeded two hours</h2>
+          <p>The cohort divides into three turnaround bands. Select a band to focus the narrative.</p>
+        </div>
+        <div class="segmented" role="group" aria-label="Select turnaround cohort">
+          <button class="seg active" data-band="fast">≤60 min</button>
+          <button class="seg" data-band="mid">61–120 min</button>
+          <button class="seg" data-band="delayed">&gt;120 min</button>
+        </div>
+      </div>
+      <div class="chart-grid">
+        <div class="chart-wrap">
+          <canvas id="distributionChart" aria-label="Distribution of turnaround cohorts" role="img"></canvas>
+        </div>
+        <aside class="insight" id="bandInsight" aria-live="polite">
+          <div class="insight-number">53 cases</div>
+          <h3>≤60-minute cohort</h3>
+          <p>Median RTP → assignment was approximately <strong>19 minutes</strong> in this cohort.</p>
+          <p class="muted">Use the controls above to compare the other turnaround bands.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel" id="capacity">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">CAPACITY CONTEXT</p>
+          <h2>Higher census was associated with prolonged turnaround</h2>
+          <p>The delayed cohort had a higher mean 1 East census at RTP. This is an association, not proof of causation.</p>
+        </div>
+        <div class="stat-chip">p = 0.019</div>
+      </div>
+      <div class="capacity-layout">
+        <div class="chart-wrap compact"><canvas id="censusChart" aria-label="Mean 1 East census for fast and delayed cohorts" role="img"></canvas></div>
+        <div class="comparison-cards">
+          <article><span>≤60 min</span><strong>15.25</strong><small>mean 1 East census at RTP</small></article>
+          <div class="delta">+1.71</div>
+          <article><span>&gt;120 min</span><strong>16.96</strong><small>mean 1 East census at RTP</small></article>
+        </div>
+      </div>
+      <div class="callout-grid">
+        <article class="callout primary">
+          <span class="big">13</span>
+          <div><strong>Low-census delayed cases</strong><p>13 of 29 cases with &gt;120-minute turnaround occurred when recorded census was ≤16.</p></div>
+        </article>
+        <article class="callout">
+          <span class="big">44.8%</span>
+          <div><strong>Share of delayed cohort</strong><p>Almost half of the prolonged cases occurred outside the highest-census range.</p></div>
+        </article>
+      </div>
+      <div class="bed-model">
+        <div><span>Physical beds</span><small>rooms that exist</small></div>
+        <b>≠</b>
+        <div><span>Staffed beds</span><small>beds supported by available staffing</small></div>
+        <b>≠</b>
+        <div><span>Immediately assignable beds</span><small>staffed + compatible + usable at RTP</small></div>
+      </div>
+      <p class="footnote">Raw census does not fully describe bed availability. The current dataset does not reconstruct exact staffed or compatible capacity at every RTP timestamp.</p>
+    </section>
+
+    <section class="panel" id="shift">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">TIME OF DAY</p>
+          <h2>Day and night distributions differ</h2>
+          <p>The source analysis identified a heavier long-delay tail during daytime periods. Exact day/night counts were not preserved in the summarized extract used for this site, so no numeric shift comparison is invented here.</p>
+        </div>
+      </div>
+      <div class="shift-toggle" role="group" aria-label="Explore day or night observations">
+        <button class="shift-btn active" data-shift="day"><span>☀</span> Day</button>
+        <button class="shift-btn" data-shift="night"><span>☾</span> Night</button>
+      </div>
+      <div class="shift-story" id="shiftStory" aria-live="polite">
+        <div class="shift-icon">☀</div>
+        <div>
+          <h3>Daytime pattern</h3>
+          <p>Observed cases were more heavily represented in the prolonged-delay tail. The analysis does not establish whether the difference reflects census, discharge timing, procedural demand, bed compatibility, staffing, or another factor.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel split" id="interpretation">
+      <div class="shows">
+        <p class="eyebrow">INTERPRETATION GUARDRAILS</p>
+        <h2>What the data shows</h2>
+        <ul>
+          <li>Variation in RTP-to-assignment time</li>
+          <li>53 cases assigned within 60 minutes</li>
+          <li>29 cases exceeding 120 minutes</li>
+          <li>Higher mean census in the delayed cohort</li>
+          <li>13 prolonged cases at census ≤16</li>
+          <li>A qualitative day/night distribution difference</li>
+        </ul>
+      </div>
+      <div class="doesnt">
+        <p class="eyebrow">LIMITS</p>
+        <h2>What it does not independently show</h2>
+        <ul>
+          <li>The specific reason for every delay</li>
+          <li>Whether a staffing decision was appropriate</li>
+          <li>Whether discharge barriers caused an individual case</li>
+          <li>Departmental or role responsibility</li>
+          <li>Causality between census and turnaround time</li>
+          <li>Exact staffed / compatible bed capacity at every RTP event</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="panel" id="questions">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">QUESTIONS RAISED BY THE DATA</p>
+          <h2>Where case-level review can add context</h2>
+          <p>Click a question to expand why it matters.</p>
+        </div>
+      </div>
+      <div class="accordion">
+        <details><summary>What distinguishes cases assigned within 60 minutes from those exceeding 120 minutes?</summary><p>This comparison can identify recurring operational conditions without assuming a cause in advance.</p></details>
+        <details><summary>What is different during daytime periods where the long-delay tail appears heavier?</summary><p>Potential context includes concurrent procedures, discharge timing, bed turnover, staffing configuration, and simultaneous admission demand.</p></details>
+        <details><summary>At census 20–22, how many beds were actually staffed and suitable for the required level of care?</summary><p>Census alone cannot distinguish physical, staffed, compatible, blocked, dirty, or already-committed beds.</p></details>
+        <details><summary>Why did 13 prolonged cases occur at census ≤16?</summary><p>These cases are especially useful for review because high raw census alone does not explain the wait.</p></details>
+        <details><summary>How often did delayed assignments overlap with pending discharge, downgrade, procedure, or competing demand?</summary><p>Overlaying those conditions may help separate isolated events from recurring patterns.</p></details>
+      </div>
+    </section>
+
+    <section class="method">
+      <p><strong>Data note:</strong> Aggregate values in this site come from the existing RTP-to-bed-assignment analysis. No patient identifiers are included. The site intentionally omits unsupported numeric day/night comparisons and does not infer causal explanations.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>RTP → Bed Assignment • Descriptive Analysis</span>
+    <span>THHBD • 2026</span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
